@@ -2,5 +2,10 @@
 <% @toonsArray.each do |toon| %>
   <p><%= toon.title %></p>
   <p><%= toon.link %></p>
-  <p><img src="http://www.eltiempo.com/<%= toon.img %>"></p>
+  <p><img src="<%= @img_url_2 %>"></p>
 <% end %>
+
+Imagen desde assets/images
+<br>
+
+<%= image_tag 'El lanzamiento de Vargas Lleras.jpeg' %>

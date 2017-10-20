@@ -35,14 +35,14 @@ class ApplicationController < ActionController::Base
 
   # Define the Toon object
   class Toon
-    def initialize(title, link, img)
+    def initialize(title, link, img_url)
       @title = title
       @link = link
-      @img = img
+      @img = img_url
     end
     attr_reader :title
     attr_reader :link
-    attr_reader :img
+    attr_reader :img_url
   end
 
   def scrape_toons
@@ -60,8 +60,17 @@ class ApplicationController < ActionController::Base
     toons.each do |toon|
       title = toon.css('h3>a').text
       link = toon.css('a')[0]['href']
-      img = toon.css('a>img').attr('src')
-      @toonsArray << Toon.new(title, link, img)
+      img_url = toon.css('a>img').attr('src')
+      @toonsArray << Toon.new(title, link, img_url)
+
+      # download image code
+      path = File.join Rails.root, 'app', 'assets', 'images', "#{title}.jpeg"
+      @img_url_2 = "http://www.eltiempo.com/#{img_url}"
+      File.open(path, 'wb') do |new_file|
+        open(@img_url_2, 'r') do |img|
+          new_file.write(img.read)
+        end
+      end
     end
 
     # We'll just try to render the array and see what happens
