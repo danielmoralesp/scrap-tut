@@ -1,0 +1,6 @@
+<h1>Tiempo's Toons</h1>
+<% @toonsArray.each do |toon| %>
+  <p><%= toon.title %></p>
+  <p><%= toon.link %></p>
+  <p><img src="http://www.eltiempo.com/<%= toon.img %>"></p>
+<% end %>

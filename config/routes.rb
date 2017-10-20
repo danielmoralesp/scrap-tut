@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root 'application#scrape_tiempo'
+  root 'application#scrape_toons'
 end
