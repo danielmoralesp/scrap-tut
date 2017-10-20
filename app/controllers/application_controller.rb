@@ -55,10 +55,10 @@ class ApplicationController < ActionController::Base
     tiempo = Nokogiri::HTML(open("http://www.eltiempo.com/opinion/caricaturas"))
 
     # Narrow down on what we want and build the toons array
-    toons = tiempo.css('article')
+    toons = tiempo.css('.col-main-article')
     @toonsArray = []
     toons.each do |toon|
-      title = toon.css('h3.title-container>a').text
+      title = toon.css('h3>a').text
       link = toon.css('a')[0]['href']
       img = toon.css('a>img').attr('src')
       @toonsArray << Toon.new(title, link, img)
